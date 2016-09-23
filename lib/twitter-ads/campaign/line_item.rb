@@ -89,12 +89,13 @@ module TwitterAds
       params = super
 
       # If automatically_set_bid is set, bid_type must not be set.
-      params.delete(:bid_type) if params[:automatically_select_bid]
+      params.delete(:bid_type) if params.has_key?(:automatically_select_bid)
 
       # advertiser_user_id is currently beta-only and causes an error when sent.
       params.delete(:advertiser_user_id)
 
       params
     end
+
   end
 end
