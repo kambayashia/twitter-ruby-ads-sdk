@@ -89,11 +89,11 @@ module TwitterAds
     def to_params
       params = super
 
-      # If automatically_set_bid is set, bid_type must not be set.
-      params.delete(:bid_type) if params.key?(:automatically_select_bid)
+      # If bid_type is set, automatically_select_bid must not be set.
+      params.delete(:automatically_select_bid) if params.key?(:bid_type)
 
       # If set to true, bid_amount_local_micro must be NULL
-      params.store(:bid_amount_local_micro, nil) if params[:automatically_select_bid] && !self.id.nil?
+      params.store(:bid_amount_local_micro, nil) if params[:bid_type] == "AUTO" && !self.id.nil?
 
       # advertiser_user_id is currently beta-only and causes an error when sent.
       params.delete(:advertiser_user_id)
