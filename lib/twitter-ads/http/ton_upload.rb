@@ -59,7 +59,7 @@ module TwitterAds
         response.headers['location'][0]
       else
         response   = init_chunked_upload
-        chunk_size = response.headers['x-ton-min-chunk-size'][0].to_i
+        chunk_size = response.headers['x-ton-max-chunk-size'][0].to_i
         location   = response.headers['location'][0]
 
         File.open(@file_path) do |file|
